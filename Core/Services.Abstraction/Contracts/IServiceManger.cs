@@ -1,5 +1,4 @@
-﻿
-namespace Services.Abstraction.Contracts
+﻿namespace Services.Abstraction.Contracts
 {
     public interface IServiceManger
     {

@@ -17,7 +17,7 @@ namespace Presentation.Controllers
     {
         // EndPoint 1 ==> GetAllProducts
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<ProductDto>>> GetAllProductsAsync([FromQuery]ProductSpecificationParameters parameters)
+        public async Task<ActionResult<PaginatedResult<ProductDto>>> GetAllProductsAsync([FromQuery]ProductSpecificationParameters parameters)
         => Ok(await _serviceManger.ProductService.GetAllProductsAsync(parameters));
 
         // EndPoint 2 ==> GetAllBrands

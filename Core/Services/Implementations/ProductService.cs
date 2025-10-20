@@ -1,7 +1,7 @@
 ﻿using AutoMapper;
 using Domain.Contracts;
 using Domain.Entities.ProductModule;
-using Services.Abstraction;
+using Services.Abstraction.Contracts;
 using Services.Specifications;
 using Shared;
 using Shared.Dtos;
@@ -24,11 +24,16 @@ namespace Services.Implementations
             return brandsDto;
         }
 
-        public async Task<IEnumerable<ProductDto>> GetAllProductsAsync(ProductSpecificationParameters parameters)
+        public async Task<PaginatedResult<ProductDto>> GetAllProductsAsync(ProductSpecificationParameters parameters)
         {
+            var productRepo = _unitOfWork.GetRepository<Product, int>();
             var specifications = new ProductWithBrandAndTypeSpecifications(parameters);
-            var products = await _unitOfWork.GetRepository<Product, int>().GetAllAsync(specifications);
-            return _mapper.Map<IEnumerable<Product>, IEnumerable<ProductDto>>(products);
+            var products = await productRepo.GetAllAsync(specifications);
+            var productsResult= _mapper.Map<IEnumerable<Product>, IEnumerable<ProductDto>>(products);
+            var pageSize = productsResult.Count();
+            var countSpecifications=new ProductCountSpecification(parameters);
+            var totalCount = await productRepo.CountAsync(countSpecifications);
+            return new PaginatedResult<ProductDto>(parameters.PageIndex, pageSize,totalCount,productsResult);
         }
 
         public async Task<IEnumerable<TypeDto>> GetAllTypesAsync()

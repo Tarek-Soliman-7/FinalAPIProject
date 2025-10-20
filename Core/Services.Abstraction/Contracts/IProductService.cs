@@ -7,12 +7,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Services.Abstraction
+namespace Services.Abstraction.Contracts
 {
     public interface IProductService
     {
         //Get All Products
-        Task<IEnumerable<ProductDto>> GetAllProductsAsync(ProductSpecificationParameters parameters);
+        Task<PaginatedResult<ProductDto>> GetAllProductsAsync(ProductSpecificationParameters parameters);
 
         //Get Products By Id
         Task<ProductDto?> GetProductsByIdAsync(int Id);
