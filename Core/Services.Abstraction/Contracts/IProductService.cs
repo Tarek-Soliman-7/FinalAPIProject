@@ -15,7 +15,7 @@ namespace Services.Abstraction.Contracts
         Task<PaginatedResult<ProductDto>> GetAllProductsAsync(ProductSpecificationParameters parameters);
 
         //Get Products By Id
-        Task<ProductDto?> GetProductsByIdAsync(int Id);
+        Task<ProductDto> GetProductsByIdAsync(int Id);
 
         //Get All Types
         Task<IEnumerable<TypeDto>> GetAllTypesAsync();

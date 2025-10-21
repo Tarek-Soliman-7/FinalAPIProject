@@ -13,7 +13,7 @@ namespace Domain.Entities.ProductModule
         public string PictureUrl {  get; set; } = null!; 
         public decimal Price { get; set; }
         // 1-M ProductType
-        public ProductType ProductType { get; set; }// Navgational Property
+        public ProductType ProductType { get; set; } // Navgational Property
         public int TypeId { get; set; }//FK
         // 1-M ProductBrand
         public ProductBrand ProductBrand { get; set; }// Navgational Property
