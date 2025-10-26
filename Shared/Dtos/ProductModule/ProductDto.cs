@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Shared.Dtos
+namespace Shared.Dtos.ProductModule
 {
     public class ProductDto
     {
@@ -13,7 +13,7 @@ namespace Shared.Dtos
         public string Description { get; set; } = null!;
         public string PictureUrl { get; set; } = null!;
         public decimal Price { get; set; }
-        public string BrandName {  get; set; } = null!;
-        public string TypeName { get; set;} = null!;
+        public string BrandName { get; set; } = null!;
+        public string TypeName { get; set; } = null!;
     }
 }

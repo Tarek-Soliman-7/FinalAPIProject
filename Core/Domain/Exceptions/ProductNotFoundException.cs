@@ -1,6 +1,6 @@
 ﻿namespace Domain.Exceptions
 {
-    public class ProductNotFoundException :NotFoundException
+    public sealed class ProductNotFoundException :NotFoundException
     {
         public ProductNotFoundException(int id) 
             : base($"Product with id {id} is not found.")

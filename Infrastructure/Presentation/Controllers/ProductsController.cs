@@ -1,8 +1,10 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
 using Services.Abstraction.Contracts;
 using Shared;
-using Shared.Dtos;
+using Shared.Dtos.ProductModule;
 using Shared.Enums;
+using Shared.ErrorModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,9 +13,8 @@ using System.Threading.Tasks;
 
 namespace Presentation.Controllers
 {
-    [ApiController] 
-    [Route("api/[controller]")]
-    public class ProductsController(IServiceManger _serviceManger) : ControllerBase
+    
+    public class ProductsController(IServiceManger _serviceManger) : ApiController
     {
         // EndPoint 1 ==> GetAllProducts
         [HttpGet]
@@ -29,6 +30,13 @@ namespace Presentation.Controllers
         [HttpGet("Types")]
         public async Task<ActionResult<IEnumerable<TypeDto>>> GetAllTypes()
         => Ok(await _serviceManger.ProductService.GetAllTypesAsync());
+
+        [ProducesResponseType(typeof(ProductDto), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(ErrorDetails), StatusCodes.Status500InternalServerError)]
+        [ProducesResponseType(typeof(ErrorDetails), StatusCodes.Status404NotFound)]
+        [ProducesResponseType(typeof(ValidationErrorResponse), StatusCodes.Status400BadRequest)]
+
+
 
         // EndPoint 4 ==> GetProductById
         [HttpGet("{id:int}")]

@@ -1,17 +1,5 @@
 ﻿
-using Domain.Contracts;
-using E_Commerce.API.Factories;
-using E_Commerce.API.Middlewares;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using Presistence.Data;
-using Presistence.Repositories;
-using Services;
-using Services.Abstraction.Contracts;
-using Services.Implementations;
-using Services.MappingProfiles;
-using Shared.Enums;
-
+using E_Commerce.API.Extentions;
 
 namespace E_Commerce.API
 {
@@ -21,49 +9,35 @@ namespace E_Commerce.API
         {
             var builder = WebApplication.CreateBuilder(args);
 
-            // Add services to the container.
+            #region DI Contianer
+            //Web Api Services
+            builder.Services.AddWepApiServices();
 
-            builder.Services.AddControllers();
-            // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
-            builder.Services.AddEndpointsApiExplorer();
-            builder.Services.AddSwaggerGen();
+            //Infrastructure Services
+            builder.Services.AddInfrastructureServices(builder.Configuration);
 
-            builder.Services.Configure<ApiBehaviorOptions>(options =>
-            {
-                options.InvalidModelStateResponseFactory = ApiResponseFactory.CustomValidationErrorResponse;
-            }); 
-
-            builder.Services.AddDbContext<StoreDbContext>(options =>
-            {
-                options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")); 
-            });
-            builder.Services.AddScoped<IDataSeeding,DataSeeding>();
-            builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
-            //builder.Services.AddAutoMapper(x => x.AddProfile(new ProductProfile()));
-            builder.Services.AddAutoMapper(x => { }, typeof(AssemblyReference).Assembly);
-            builder.Services.AddScoped<IServiceManger,ServiceManger>();
+            //Core Services
+            builder.Services.AddCoreServices();
 
             builder.Services.AddSwaggerGen(c =>
             {
                 c.UseInlineDefinitionsForEnums(); // يعمل تأثير مشابه
                 c.SchemaFilter<DisplayEnumSchemaFilter>();
             });
+            #endregion
 
 
 
+            #region Pipelines - Middlewares
             var app = builder.Build();
 
-            using var scope = app.Services.CreateScope();
-            var objOfDataSeeding = scope.ServiceProvider.GetRequiredService<IDataSeeding>();
-            await objOfDataSeeding.SeedDataAsync();
+            await app.SeedDatabaseAsync();
 
-            //Middleware ==> Handle exceptions
-            app.UseMiddleware<GlobalExceptionHandlingMiddleware>();
+            app.UseExceptionHandlingMiddlewares();
             // Configure the HTTP request pipeline.
             if (app.Environment.IsDevelopment())
             {
-                app.UseSwagger();      // Middlewares ==> Swagger
-                app.UseSwaggerUI();    // Middlewares ==> Swagger
+                app.UseSwaggerMiddlewares();
             }
 
             app.UseHttpsRedirection();
@@ -74,7 +48,8 @@ namespace E_Commerce.API
 
             app.MapControllers();
 
-            app.Run();
+            app.Run(); 
+            #endregion
         }
     }
 }
