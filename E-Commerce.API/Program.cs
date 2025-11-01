@@ -1,5 +1,7 @@
-﻿
-using E_Commerce.API.Extentions;
+﻿using E_Commerce.API.Extentions;
+using Domain.Entities.IdentityModule;
+using Microsoft.AspNetCore.Identity;
+using Persistence.Identity;
 
 namespace E_Commerce.API
 {
@@ -9,23 +11,24 @@ namespace E_Commerce.API
         {
             var builder = WebApplication.CreateBuilder(args);
 
-            #region DI Contianer
-            //Web Api Services
+            #region DI Container
+            // Web API services
             builder.Services.AddWepApiServices();
 
-            //Infrastructure Services
+            // Infrastructure services
             builder.Services.AddInfrastructureServices(builder.Configuration);
 
-            //Core Services
+
+            // Core services
             builder.Services.AddCoreServices();
 
+            // Swagger settings
             builder.Services.AddSwaggerGen(c =>
             {
-                c.UseInlineDefinitionsForEnums(); // يعمل تأثير مشابه
+                c.UseInlineDefinitionsForEnums();
                 c.SchemaFilter<DisplayEnumSchemaFilter>();
             });
             #endregion
-
 
 
             #region Pipelines - Middlewares
@@ -34,7 +37,7 @@ namespace E_Commerce.API
             await app.SeedDatabaseAsync();
 
             app.UseExceptionHandlingMiddlewares();
-            // Configure the HTTP request pipeline.
+
             if (app.Environment.IsDevelopment())
             {
                 app.UseSwaggerMiddlewares();
@@ -43,12 +46,13 @@ namespace E_Commerce.API
             app.UseHttpsRedirection();
             app.UseStaticFiles();
 
+           
+            app.UseAuthentication();
             app.UseAuthorization();
-
 
             app.MapControllers();
 
-            app.Run(); 
+            app.Run();
             #endregion
         }
     }

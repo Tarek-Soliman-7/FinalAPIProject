@@ -40,29 +40,43 @@ namespace E_Commerce.API.Middlewares
             {
                 StatusCode = StatusCodes.Status404NotFound,
                 ErrorMessage = $"The end point with url {context.Request.Path} not found"
-            };
+            }.ToString();
+            await context.Response.WriteAsync(response); 
             
         }
 
         private async Task HandleExceptionAsync(HttpContext context, Exception ex)
         {
+
+            //2] Change content type
+            context.Response.ContentType = "application/json";
+
+            //3] Write response in body
+            var response = new ErrorDetails()
+            {
+                ErrorMessage = ex.Message
+            };
             //1] Change statue code
             //context.Response.StatusCode =StatusCodes.Status500InternalServerError;
             context.Response.StatusCode = ex switch
             {
                 NotFoundException => StatusCodes.Status404NotFound,
+                UnauthorizedException => StatusCodes.Status401Unauthorized,
+                ValidtionException validtionException => HandleValidationException(validtionException,response),
                 (_) => StatusCodes.Status500InternalServerError
             };
-            //2] Change content type
-            context.Response.ContentType = "application/json";
-            //3] Write response in body
-            var response = new ErrorDetails
-            {
-                StatusCode = context.Response.StatusCode,
-                ErrorMessage = ex.Message
-            }.ToString();
-            await context.Response.WriteAsync(response);
 
+            //Response ==> StatusCode = context.Response.StatusCode, 
+            response.StatusCode=context.Response.StatusCode;
+           
+            await context.Response.WriteAsync(response.ToString());
+
+        }
+
+        private int HandleValidationException(ValidtionException validtionException, ErrorDetails response)
+        {
+            response.Errors =validtionException.Errors;
+            return StatusCodes.Status400BadRequest;
         }
     }
 }
