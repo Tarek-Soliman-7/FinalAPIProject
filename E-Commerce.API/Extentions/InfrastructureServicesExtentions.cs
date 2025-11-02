@@ -1,7 +1,11 @@
 ﻿
 using Domain.Entities.IdentityModule;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.IdentityModel.Tokens;
 using Persistence.Identity;
+using Shared.Common;
+using System.Text;
 
 namespace E_Commerce.API.Extensions
 {
@@ -34,7 +38,34 @@ namespace E_Commerce.API.Extensions
             services.AddScoped<IBasketRepository, BasketRepository>();
             //builder.Services.AddAutoMapper(x => x.AddProfile(new ProductProfile()));
 
+            services.ValidateJwt(configuration); 
+
             
+            return services;
+        }
+
+        public static IServiceCollection ValidateJwt(this IServiceCollection services,IConfiguration configuration)
+        {
+            var jwtOptions= configuration.GetSection("JwtOptions").Get<JwtOptions>();
+            services.AddAuthentication(options =>
+            {
+                options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+                options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+                
+            }).AddJwtBearer(options =>
+            {
+                options.TokenValidationParameters = new TokenValidationParameters
+                {
+                    ValidateIssuer = true,
+                    ValidateAudience = true,
+                    ValidateLifetime = true,
+                    ValidateIssuerSigningKey = true,
+                    ValidIssuer = jwtOptions.Issure,
+                    ValidAudience = jwtOptions.Audience,
+                    IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwtOptions.SecretKey))
+                };
+            });
+            services.AddAuthorization();
             return services;
         }
     }

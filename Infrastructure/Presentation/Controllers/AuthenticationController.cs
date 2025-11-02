@@ -19,7 +19,7 @@ namespace Presentation.Controllers
         //Post ==> Login
         [HttpPost("Login")]
         public async Task<ActionResult<UserResultDto>> LoginAsync(LoginDto loginDto)
-            =>Ok(await _serviceManger.AuthenticationService.LoginAsync(loginDto));
+            => Ok(await _serviceManger.AuthenticationService.LoginAsync(loginDto));
 
     }
 }

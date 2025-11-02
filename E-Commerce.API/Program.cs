@@ -20,7 +20,7 @@ namespace E_Commerce.API
 
 
             // Core services
-            builder.Services.AddCoreServices();
+            builder.Services.AddCoreServices(builder.Configuration);
 
             // Swagger settings
             builder.Services.AddSwaggerGen(c =>
@@ -48,9 +48,9 @@ namespace E_Commerce.API
 
            
             app.UseAuthentication();
-            app.UseAuthorization();
+            app.UseAuthorization();//step 1
 
-            app.MapControllers();
+            app.MapControllers();//step 2
 
             app.Run();
             #endregion
