@@ -3,8 +3,8 @@
     public record OrderRequest
     {
         public string BasketId {  get; init; }=string.Empty;
-        public AddressDto ShippingAddress { get; init; }
-        public int DeliveryMehtodId { get; init; }
+        public AddressDto ShipToAddress { get; init; }
+        public int DeliveryMethodId { get; init; }
 
     }
 }

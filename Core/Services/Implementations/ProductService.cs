@@ -31,8 +31,8 @@ namespace Services.Implementations
             var specifications = new ProductWithBrandAndTypeSpecifications(parameters);
             var products = await productRepo.GetAllAsync(specifications);
             var productsResult= _mapper.Map<IEnumerable<Product>, IEnumerable<ProductDto>>(products);
-            var pageSize = productsResult.Count();
-            var countSpecifications=new ProductCountSpecification(parameters);
+            var pageSize = parameters.PageSize;
+            var countSpecifications =new ProductCountSpecification(parameters);
             var totalCount = await productRepo.CountAsync(countSpecifications);
             return new PaginatedResult<ProductDto>(parameters.PageIndex, pageSize,totalCount,productsResult);
         }

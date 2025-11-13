@@ -2,6 +2,8 @@
 using Domain.Entities.IdentityModule;
 using Microsoft.AspNetCore.Identity;
 using Persistence.Identity;
+using Swashbuckle.AspNetCore.SwaggerUI;
+using System.Text.Json;
 
 namespace E_Commerce.API
 {
@@ -13,7 +15,7 @@ namespace E_Commerce.API
 
             #region DI Container
             // Web API services
-            builder.Services.AddWepApiServices();
+            builder.Services.AddWepApiServices(builder.Configuration);
 
             // Infrastructure services
             builder.Services.AddInfrastructureServices(builder.Configuration);
@@ -40,12 +42,34 @@ namespace E_Commerce.API
 
             if (app.Environment.IsDevelopment())
             {
-                app.UseSwaggerMiddlewares();
+                app.UseSwagger();
+                app.UseSwaggerUI( op =>
+                {
+                    op.ConfigObject = new ConfigObject()
+                    {
+                        DisplayRequestDuration=true,
+                    };
+
+                    op.DocumentTitle = "My E-Commerce API";
+
+                    op.JsonSerializerOptions = new JsonSerializerOptions()
+                    {
+                        PropertyNamingPolicy = JsonNamingPolicy.CamelCase
+                    };
+
+                    op.DocExpansion(DocExpansion.None);
+
+                    op.EnableFilter();
+
+                    op.EnablePersistAuthorization();
+                });
+                
             }
 
             app.UseHttpsRedirection();
             app.UseStaticFiles();
 
+            app.UseCors("CorsPolicy");
            
             app.UseAuthentication();
             app.UseAuthorization();//step 1

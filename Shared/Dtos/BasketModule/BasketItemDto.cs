@@ -3,13 +3,13 @@ namespace Shared.Dtos.BasketModule
 {
     public record BasketItemDto
     {
-        public int Id { get; set; }
-        public string ProductName { get; set; } = string.Empty;
-        public string PictureUrl { get; set; } = string.Empty;
+        public int Id { get; init; }
+        public string ProductName { get; init; } = string.Empty;
+        public string PictureUrl { get; init; } = string.Empty;
         [Range(1,double.MaxValue)]
-        public decimal Price { get; set; }
+        public decimal Price { get; init; }
         [Range (1,99)]
-        public int Quantity { get; set; }
+        public int Quantity { get; init; }
        
     }
 }
