@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using ShippingAddress= Domain.Entities.OrderModule.Address;
+﻿using ShippingAddress = Domain.Entities.OrderModule.Address;
 
 namespace Domain.Entities.OrderModule
 {

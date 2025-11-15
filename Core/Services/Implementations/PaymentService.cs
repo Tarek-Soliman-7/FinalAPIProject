@@ -1,15 +1,6 @@
-﻿using AutoMapper;
-using Domain.Contracts;
-using Domain.Entities.BasketModule;
-using Domain.Entities.OrderModule;
-using Domain.Exceptions;
-using Microsoft.Extensions.Configuration;
-using Services.Abstraction.Contracts;
-using Services.Specifications;
-using Shared.Dtos.BasketModule;
-using Stripe;
+﻿
 using Product = Domain.Entities.ProductModule.Product;
-using Order = Domain.Entities.OrderModule.Order; 
+using Order = Domain.Entities.OrderModule.Order;
 namespace Services.Implementations
 {
     public class PaymentService(IConfiguration _configuration,IBasketRepository _basketRepository

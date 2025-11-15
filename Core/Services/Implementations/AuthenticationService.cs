@@ -1,23 +1,4 @@
-﻿using AutoMapper;
-using Domain.Entities.IdentityModule;
-using Domain.Exceptions;
-using Microsoft.AspNetCore.Identity;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Options;
-using Microsoft.IdentityModel.Tokens;
-using Services.Abstraction.Contracts;
-using Shared.Common;
-using Shared.Dtos.IdentityModule;
-using Shared.Dtos.OrderModule;
-using System;
-using System.Collections.Generic;
-using System.IdentityModel.Tokens.Jwt;
-using System.Linq;
-using System.Security.Claims;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Services.Implementations
+﻿namespace Services.Implementations
 {
     internal class AuthenticationService(UserManager<User> _userManager,IOptions<JwtOptions> _options, IMapper _mapper) : IAuthenticationService
     {

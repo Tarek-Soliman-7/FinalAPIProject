@@ -1,6 +1,4 @@
-﻿using Domain.Entities.ProductModule;
-using Shared;
-using Shared.Enums;
+﻿using Product = Domain.Entities.ProductModule.Product;
 
 namespace Services.Specifications
 {

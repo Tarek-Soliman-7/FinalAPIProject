@@ -1,6 +1,4 @@
-﻿using Domain.Entities.OrderModule;
-
-namespace Services.Specifications
+﻿namespace Services.Specifications
 {
     internal class OrderWithIncludesSpecifications:BaseSpecifications<Order,Guid>
     {

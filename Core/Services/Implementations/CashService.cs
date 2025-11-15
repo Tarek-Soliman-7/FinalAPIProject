@@ -1,6 +1,4 @@
-﻿using Services.Abstraction.Contracts;
-
-namespace Services.Implementations
+﻿namespace Services.Implementations
 {
     public class CashService : ICashService
     {

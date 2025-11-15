@@ -1,8 +1,4 @@
-﻿using Domain.Contracts;
-using Domain.Entities;
-using System.Linq.Expressions;
-
-namespace Services.Specifications
+﻿namespace Services.Specifications
 {
     internal abstract class BaseSpecifications<TEntity, TKey> 
         : ISpecifications<TEntity, TKey> where TEntity : BaseEntity<TKey>

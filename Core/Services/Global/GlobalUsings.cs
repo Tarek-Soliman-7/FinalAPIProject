@@ -1,12 +1,27 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Services.Global
-{
-    internal class GlobalUsings
-    {
-    }
-}
+﻿global using AutoMapper;
+global using Domain.Entities.IdentityModule;
+global using Domain.Exceptions;
+global using Microsoft.AspNetCore.Identity;
+global using Microsoft.EntityFrameworkCore;
+global using Microsoft.Extensions.Options;
+global using Microsoft.IdentityModel.Tokens;
+global using Services.Abstraction.Contracts;
+global using Shared.Common;
+global using Shared.Dtos.IdentityModule;
+global using Shared.Dtos.OrderModule;
+global using System.IdentityModel.Tokens.Jwt;
+global using System.Security.Claims;
+global using System.Text;
+global using Domain.Contracts;
+global using Domain.Entities.BasketModule;
+global using Shared.Dtos.BasketModule;
+global using Domain.Entities.OrderModule;
+global using Domain.Entities.ProductModule;
+global using Services.Specifications;
+global using Microsoft.Extensions.Configuration;
+global using Stripe;
+global using Shared;
+global using Shared.Dtos.ProductModule;
+global using Domain.Entities;
+global using System.Linq.Expressions;
+global using Shared.Enums;

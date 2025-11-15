@@ -1,6 +1,4 @@
-﻿using Domain.Entities.ProductModule;
-
-namespace Domain.Entities.BasketModule
+﻿namespace Domain.Entities.BasketModule
 {
     public class BasketItem
     {

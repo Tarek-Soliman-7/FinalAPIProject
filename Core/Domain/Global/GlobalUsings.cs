@@ -1,12 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Domain.Global
-{
-    internal class GlobalUsings
-    {
-    }
-}
+﻿global using Domain.Entities.BasketModule;
+global using Domain.Entities;
+global using System.Linq.Expressions;
+global using Microsoft.AspNetCore.Identity;

@@ -1,7 +1,4 @@
-﻿
-using Domain.Entities.BasketModule;
-
-namespace Domain.Contracts
+﻿namespace Domain.Contracts
 {
     public interface IBasketRepository
     {

@@ -1,5 +1,4 @@
-﻿using Services.Abstraction.Contracts;
-
+﻿
 namespace Services.Implementations
 {
     public class ServiceManagerWithFactoryDelegate(Func<IProductService> _productFactory,
@@ -15,7 +14,7 @@ namespace Services.Implementations
 
         public IOrderService OrderService => _orderFactory.Invoke();
 
-        public IPaymentService PaymentService => _paymentFactory.Invoke();
+        public IPaymentService paymentService => _paymentFactory.Invoke();
 
         public ICashService CashService => _cashFactory.Invoke();
     }

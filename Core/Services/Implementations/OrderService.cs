@@ -1,14 +1,4 @@
-﻿using AutoMapper;
-using Domain.Contracts;
-using Domain.Entities.BasketModule;
-using Domain.Entities.OrderModule;
-using Domain.Entities.ProductModule;
-using Domain.Exceptions;
-using Services.Abstraction.Contracts;
-using Services.Specifications;
-using Shared.Dtos.OrderModule;
-
-namespace Services.Implementations
+﻿namespace Services.Implementations
 {
     internal class OrderService(IMapper _mapper
         ,IBasketRepository _basketRepository, IUnitOfWork _unitOfWork) : IOrderService

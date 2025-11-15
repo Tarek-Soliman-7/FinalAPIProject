@@ -1,18 +1,4 @@
-﻿using AutoMapper;
-using Domain.Contracts;
-using Domain.Entities.IdentityModule;
-using Microsoft.AspNetCore.Identity;
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.Options;
-using Services.Abstraction.Contracts;
-using Shared.Common;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Services.Implementations
+﻿namespace Services.Implementations
 {
     public class ServiceManger(IUnitOfWork _unitOfWork,
         IMapper _mapper,

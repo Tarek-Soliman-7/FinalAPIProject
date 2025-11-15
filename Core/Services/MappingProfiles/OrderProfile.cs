@@ -1,7 +1,4 @@
-﻿using AutoMapper;
-using Domain.Entities.OrderModule;
-using Shared.Dtos.OrderModule;
-using ShippingAddress = Domain.Entities.OrderModule.Address;
+﻿using ShippingAddress = Domain.Entities.OrderModule.Address;
 using IdentityAddress = Domain.Entities.IdentityModule.Address;
 namespace Services.MappingProfiles
 {

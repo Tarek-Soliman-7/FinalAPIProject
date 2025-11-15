@@ -1,6 +1,4 @@
-﻿using Domain.Entities;
-
-namespace Domain.Contracts
+﻿namespace Domain.Contracts
 {
     public interface IUnitOfWork
     {

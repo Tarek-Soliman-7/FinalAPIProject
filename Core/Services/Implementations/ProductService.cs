@@ -1,19 +1,4 @@
-﻿using AutoMapper;
-using Domain.Contracts;
-using Domain.Entities.ProductModule;
-using Domain.Exceptions;
-using Services.Abstraction.Contracts;
-using Services.Specifications;
-using Shared;
-using Shared.Dtos.ProductModule;
-using Shared.Enums;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Services.Implementations
+﻿namespace Services.Implementations
 {
     public class ProductService(IUnitOfWork _unitOfWork, IMapper _mapper) : IProductService
     {
